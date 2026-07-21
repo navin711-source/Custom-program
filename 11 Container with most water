@@ -1,0 +1,49 @@
+#include <stdio.h>
+
+int maxArea(int height[], int n)
+{
+    int left = 0;
+    int right = n - 1;
+    int max = 0;
+
+    while (left < right)
+    {
+        int h;
+
+        if (height[left] < height[right])
+            h = height[left];
+        else
+            h = height[right];
+
+        int area = h * (right - left);
+
+        if (area > max)
+            max = area;
+
+        if (height[left] < height[right])
+            left++;
+        else
+            right--;
+    }
+
+    return max;
+}
+
+int main()
+{
+    int n, i;
+    int height[100];
+
+    printf("Enter number of heights: ");
+    scanf("%d", &n);
+
+    printf("Enter the heights:\n");
+    for (i = 0; i < n; i++)
+    {
+        scanf("%d", &height[i]);
+    }
+
+    printf("Maximum Area = %d\n", maxArea(height, n));
+
+    return 0;
+}
