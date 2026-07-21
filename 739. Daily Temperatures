@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+int main()
+{
+    int n, i;
+    int temp[100];
+    int ans[100];
+    int stack[100];
+    int top = -1;
+
+    printf("Enter number of days: ");
+    scanf("%d", &n);
+
+    printf("Enter temperatures:\n");
+    for(i = 0; i < n; i++)
+        scanf("%d", &temp[i]);
+
+    // Traverse from right to left
+    for(i = n - 1; i >= 0; i--)
+    {
+        while(top != -1 && temp[stack[top]] <= temp[i])
+            top--;
+
+        if(top == -1)
+            ans[i] = 0;
+        else
+            ans[i] = stack[top] - i;
+
+        stack[++top] = i;
+    }
+
+    printf("Answer:\n");
+    for(i = 0; i < n; i++)
+        printf("%d ", ans[i]);
+
+    printf("\n");
+
+    return 0;
+}
